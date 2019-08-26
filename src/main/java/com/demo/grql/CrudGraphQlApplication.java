@@ -1,7 +1,9 @@
 package com.demo.grql;
 
+import com.demo.grql.repo.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class CrudGraphQlApplication {
@@ -10,4 +12,13 @@ public class CrudGraphQlApplication {
 		SpringApplication.run(CrudGraphQlApplication.class, args);
 	}
 
+	@Bean
+	public Query query(UserRepository userRepository) {
+		return new Query(userRepository);
+	}
+
+	@Bean
+	public Mutation mutation(UserRepository userRepository) {
+		return new Mutation(userRepository);
+	}
 }
