@@ -3,13 +3,14 @@ schema {
 }
 
 type Query {
-	user: [User]
+	users: [User]
+	user(id: String): User
 }
 
 type User {
-	id: ID,
-	name: String,
-	userName: String,
-	email: String,
+	id: String
+	name: String
+	userName: String
+	email: String
 	password: String
 }

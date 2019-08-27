@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name= "user", schema = "result_automation")
+@Table(name= "user")
 @Builder
 @AllArgsConstructor
 public class User {
