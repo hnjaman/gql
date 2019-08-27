@@ -32,4 +32,11 @@ public class User {
 	@NotNull
 	@Column(name = "password")
 	private String password;
+
+	public User(@NotNull String name, @NotNull String userName, @NotNull String email, @NotNull String password) {
+		this.name = name;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
 }

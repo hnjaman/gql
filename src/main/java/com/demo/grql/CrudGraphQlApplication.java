@@ -11,4 +11,9 @@ public class CrudGraphQlApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CrudGraphQlApplication.class, args);
 	}
+
+	@Bean
+	public Mutation mutation(UserRepository userRepository) {
+		return new Mutation(userRepository);
+	}
 }

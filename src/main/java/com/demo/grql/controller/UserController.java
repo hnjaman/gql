@@ -3,6 +3,7 @@ package com.demo.grql.controller;
 
 
 import com.demo.grql.datafetcher.AllUserDataFetcher;
+import com.demo.grql.datafetcher.SaveUser;
 import com.demo.grql.datafetcher.UserDataFetcher;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -41,6 +42,8 @@ public class UserController {
 	private AllUserDataFetcher getUsers;
 	@Autowired
 	private UserDataFetcher getUser;
+	@Autowired
+	private SaveUser saveUser;
 
 	@PostConstruct
 	public void loadSchema() throws IOException{
@@ -55,11 +58,12 @@ public class UserController {
 		return newRuntimeWiring()
 				.type("Query", typeWiring -> typeWiring
 						.dataFetcher("users", getUsers)
-						.dataFetcher("user", getUser) )
-				.build();
+						.dataFetcher("user", getUser)
+						.dataFetcher("createUser", saveUser )
+				).build();
 	}
 
-	@RequestMapping(value = "/graphql-users", method = RequestMethod.POST)
+	@GetMapping(value = "/graphql-users")
 	public ResponseEntity<Object> getGraphQlUsers(@RequestBody String userQuery){
 		ExecutionResult result = graphQL.execute(userQuery);
 		LOGGER.info(String.valueOf(result.getErrors()));
